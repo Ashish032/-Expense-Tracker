@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expenses_tracker/widgets/expenses.dart';
+//import 'package:flutter/services.dart';
 
 var kColorScheme =
     ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 96, 59, 181));
@@ -9,6 +10,9 @@ var kDarkColorScheme = ColorScheme.fromSeed(
     seedColor: const Color.fromARGB(255, 5, 99, 125));
 
 main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //     .then((fn) {
   runApp(MaterialApp(
     darkTheme: ThemeData.dark().copyWith(
       //for Dark Theme
@@ -26,7 +30,7 @@ main() {
           backgroundColor: kColorScheme.onPrimaryContainer,
           foregroundColor: kColorScheme.onPrimary),
       cardTheme: const CardTheme().copyWith(
-          color: const Color.fromARGB(255, 165, 107, 205),
+          color: const Color.fromARGB(255, 144, 105, 253).withOpacity(0.7),
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 6)),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
