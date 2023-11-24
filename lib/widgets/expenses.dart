@@ -26,17 +26,6 @@ class _ExpensesState extends State<Expenses> {
         date: DateTime.now(),
         category: Category.leisure),
   ];
-
-  void _openAddExpenseOverlay() {
-    //provide a overlay on clicked by closing the expense screen
-    showModalBottomSheet(
-        isScrollControlled: true, //display full screen modal
-        context: context,
-        builder: (ctx) => newExpense(
-              onAddExpense: _addExpenses,
-            ));
-  }
-
   void _addExpenses(Expense expense) {
     //onAdd expense passes the value indirectly to this _addExpenses
     setState(() {
@@ -51,6 +40,7 @@ class _ExpensesState extends State<Expenses> {
     setState(() {
       _registeredExpenses.remove(expense);
     });
+
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       //ScaffoldMessenger is used for display info message for deletion
@@ -67,8 +57,20 @@ class _ExpensesState extends State<Expenses> {
     ));
   }
 
+  void _openAddExpenseOverlay() {
+    //provide a overlay on clicked by closing the expense screen
+    showModalBottomSheet(
+        useSafeArea: true,
+        isScrollControlled: true, //display full screen modal
+        context: context,
+        builder: (ctx) => newExpense(
+              onAddExpense: _addExpenses,
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Widget mainContent = const Center(
       child: Text('No expenses found. Start adding some!'),
     );
@@ -88,11 +90,19 @@ class _ExpensesState extends State<Expenses> {
               onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add)),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(child: mainContent),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                //Chart(expenses: _registeredExpenses),
+                const Text('chart'),
+                Expanded(child: mainContent),
+              ],
+            )
+          : Row(children: [
+              //Chart(expenses: _registeredExpenses),
+              const Text('chart'),
+              Expanded(child: mainContent),
+            ]),
     );
   }
 }

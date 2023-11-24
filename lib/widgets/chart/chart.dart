@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:expenses_tracker/widgets/chart/chart_bar.dart';
 import 'package:expenses_tracker/model/expense.dart';
 

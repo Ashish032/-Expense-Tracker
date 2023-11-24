@@ -43,15 +43,15 @@ class Expense {
 class ExpenseBucket {
   const ExpenseBucket({required this.category, required this.expenses});
 
+  final Category category;
+  final List<Expense> expenses;
+
   ExpenseBucket.forCategory(List<Expense> allExpense, this.category)
       : expenses = allExpense
             .where((expense) =>
                 expense.category ==
                 category) //here where filter out the item which are in same category
             .toList();
-
-  final Category category;
-  final List<Expense> expenses;
 
   double get totalExpenses {
     double sum = 0;
